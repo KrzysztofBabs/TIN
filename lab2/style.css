@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #ffffff;
+}
+
+.logo {
+    width: 200px;
+    height: auto;
+}
+
+nav {
+    margin-left: auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.nav-links li:not(:last-child)::after {
+    content: "|";
+    color: rgb(212, 23, 23);
+    margin-left: 20px;
+    font-size: 22px;
+    opacity: 0.6;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: rgb(26, 21, 21);
+    font-size: 22px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #f4a261;
+}
+
+/* Stylizacja trzech sekcji */
+.content {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    background-color: #f4f4f4;
+}
+
+.section {
+    flex: 1;
+    margin: 0 10px;
+    padding: 40px;
+    text-align: left;
+    font-size: 24px;
+    font-weight: lighter;
+    background-color: transparent;
+}
+
+.section h2 {
+    margin-bottom: 15px;
+}
+
+.section p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* Stylizacja zdjęć w sekcji 2 */
+.images {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.images h2 {
+    margin-bottom: 15px;
+}
+
+/* Siatka zdjęć w sekcji 2 */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.image-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Stopka */
+.footer {
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/* Media Queries */
+
+/* Dla tabletów (od 768px do 1024px) */
+@media (max-width: 1024px) {
+
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .section {
+        margin: 20px 0;
+    }
+
+    .image-grid {
+        grid-template-columns: 1fr 1fr; /* 2 kolumny zdjęć */
+    }
+}
+
+/* Dla telefonów (do 768px) */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .navbar.active .nav-links {
+        display: flex;
+    }
+
+    .navbar .hamburger {
+        display: block;
+        cursor: pointer;
+    }
+
+    .hamburger div {
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+        margin: 5px;
+        transition: 0.3s;
+    }
+
+    .content {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .image-grid {
+        grid-template-columns: 1fr; /* Jedna kolumna zdjęć */
+    }
+
+    .section {
+        margin: 10px 0;
+    }
+
+    header{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+/* Dla telefonów w orientacji pionowej (do 480px) */
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .footer {
+        font-size: 14px;
+    }
+}

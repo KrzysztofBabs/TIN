@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polsko-Japońska Akademia Technik Komputerowych</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+  <nav class="bg-white text-black shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-2 -ml-7">
+          <img src="logo.png" alt="Logo PJATK" class="h-12 w-15" />
+          <span class="font-bold text-xl">PJATK</span>
+        </div>
+        <div class="hidden md:flex space-x-4">
+          <a href="#" class="hover:text-gray-600">Strona główna</a>
+          <a href="#" class="hover:text-gray-600">O nas</a>
+          <a href="#" class="hover:text-gray-600">Oferta</a>
+          <a href="#" class="hover:text-gray-600">Blog</a>
+          <a href="#" class="hover:text-gray-600">Kontakt</a>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-2xl focus:outline-none">☰</button>
+        </div>
+      </div>
+
+      
+      <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 mt-2">
+        <a href="#" class="block py-2 border-b">Strona główna</a>
+        <a href="#" class="block py-2 border-b">O nas</a>
+        <a href="#" class="block py-2 border-b">Oferta</a>
+        <a href="#" class="block py-2 border-b">Blog</a>
+        <a href="#" class="block py-2 border-b">Kontakt</a>
+      </div>
+    </div>
+  </nav>
+  <div class="border-t-2 border-grey"></div>
+
+  
+  <header class="text-center py-10 bg-white">
+    <div class="hidden md:block text-center">
+    <h1 class="text-4xl font-extrabold">Polsko-Japońska</h1>
+    <h2 class="text-lg text-gray-600 mt-2">Akademia Technik Komputerowych</h2>
+        <div class="mt-4 space-x-2">
+      <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dla studentów</a>
+      <a href="#" class="bg-blue-400 text-white px-4 py-2 rounded hover:bg-blue-500">Dla kandydatów</a>
+        </div>
+    </div>
+  </header>
+
+  
+  <section class="bg-gray-100 py-10">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        
+        
+        <div class="bg-white rounded shadow hover:shadow-lg transition">
+          <img src="zdjecie.jpg" alt="Aktualność 1" class="w-full h-48 object-cover rounded-t">
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-2">Aktualność 1</h3>
+            <p class="text-gray-600 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <a href="#" class="text-blue-600 hover:underline">Więcej</a>
+          </div>
+        </div>
+
+       
+        <div class="bg-white rounded shadow hover:shadow-lg transition">
+          <img src="zdjecie.jpg" alt="Aktualność 2" class="w-full h-48 object-cover rounded-t">
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-2">Aktualność 2</h3>
+            <p class="text-gray-600 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <a href="#" class="text-blue-600 hover:underline">Więcej</a>
+          </div>
+        </div>
+
+        
+        <div class="bg-white rounded shadow hover:shadow-lg transition">
+          <img src="zdjecie.jpg" alt="Aktualność 3" class="w-full h-48 object-cover rounded-t">
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-2">Aktualność 3</h3>
+            <p class="text-gray-600 mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            <a href="#" class="text-blue-600 hover:underline">Więcej</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="bg-gray-900 text-white py-6">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-center md:text-left space-y-4 sm:space-y-0">
+      
+      <div class="text-left">
+        <span class="font-bold text-xl mb-4 block">O nas</span>
+        <p class="mb-2">Wydziały</p>
+        <p class="mb-2">Kierunki</p>
+        <p>Specjalności</p>
+      </div>
+  
+     
+      <div class="text-left">
+        <span class="font-bold text-xl mb-4 block">Oferta</span>
+        <p class="mb-2">Studia dzienne</p>
+        <p class="mb-2">Studia zaoczne</p>
+        <p>Studia podyplomowe</p>
+      </div>
+  
+      
+      <div class="text-left">
+        <span class="font-bold text-xl mb-4 block">Kariera</span>
+        <p class="mb-2">Praca</p>
+        <p class="mb-2">Staże</p>
+        <p>Kursy</p>
+      </div>
+  
+      
+      <div class="text-left">
+        <span class="font-bold text-xl mb-4 block">Więcej</span>
+        <p class="mb-2">Kontakt</p>
+        <p>Polityka prywatności</p>
+      </div>
+    </div>
+  </footer>
+  
+  
+  
+  <!-- JS do rozwijania menu -->
+  <script>
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        margin: 5px;
+        display: inline-block;
+        text-align: center;
+        /*line-height: 100px;*/
+
+        padding: 10px;
+    }
+
+    .button {
+        width: 200px;
+        padding: 10px;
+        margin: 10px;
+    }
+</style>
+<body>
+
+<div id="container">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+    <div class="box">4</div>
+</div>
+
+<button class="button" onclick="dodaj()">dodaj diva</button>
+<button class="button" onclick="usun()">usun diva</button>
+<button class="button" onclick="zmienKolorTla()">zmien kolor tla</button>
+<button class="button" onclick="dodajTekst()">dodaj tekst do diva</button>
+
+<script>
+    function dodaj(){
+        const container=document.getElementById("container");
+        let div=document.createElement('div');
+        div.className="box";
+        div.textContent = container.children.length + 1;
+        container.appendChild(div);
+
+    }
+    function usun(){
+        const container=document.getElementById("container");
+        if(container.firstElementChild){
+            container.removeChild(container.firstElementChild);
+        }
+
+    }
+
+    function zmienKolorTla(){
+        const container=document.getElementById("container");
+        if(container.children[2]){
+            container.children[2].style.backgroundColor="green";
+        }
+    }
+
+    function dodajTekst(){
+        document.querySelectorAll('.box').forEach((div, index) => {
+            const numer = index + 1;
+            div.innerHTML = `<div>${numer}</div><div style="font-size: 12px;">nowy tekst</div>`;
+        });
+
+    }
+
+</script>
+
+
+
+
+</body>
+</html>

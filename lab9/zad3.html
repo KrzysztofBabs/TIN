@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <title>zadanie</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<style>
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  header img {
+    height: 40px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav ul li {
+    margin-left: 20px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .hamburger {
+    font-size: 30px;
+    cursor: pointer;
+    display: none;
+    color: white;
+  }
+
+
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+    }
+
+    nav ul {
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background: #333;
+      width: 100%;
+      display: none;
+    }
+
+    nav ul.show {
+      display: flex;
+    }
+
+    nav ul li {
+      margin: 15px 0;
+      text-align: center;
+    }
+  }
+
+  .section img {
+    width: 150px;
+    height: auto;
+    margin: 10px;
+    border: 2px solid #ccc;
+    transition: transform 0.3s;
+  }
+
+  .section img:hover {
+    transform: scale(1.05);
+  }
+
+</style>
+<body>
+
+
+
+
+<header>
+  <div class="hamburger" id="hamburger">&#9776;</div>
+
+
+  <img src="logo.png">
+  <nav id="nav">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Offer</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+</header>
+<main>
+  <section class="content" >
+    <div class="section">
+      <h2>Item 1</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
+
+      </p>
+    </div>
+    <div class="section">
+      <h2>Item 2</h2>
+      <img src="Barcelona.jpg" alt="Obraz 1">
+      <img src="Barcelona2.jpg" alt="Obraz 2">
+      <img src="Barcelona.jpg" alt="Obraz 3">
+      <img src="Barcelona2.jpg" alt="Obraz 4">
+    </div>
+
+
+    <div class="section">
+      <h2>Item 3</h2>
+      <p>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit.</p>
+    </div>
+
+  </section>
+</main>
+
+
+<footer class="footer">
+  <p>&copy; PJATK</p>
+</footer>
+
+<script>
+  const hamburger=document.getElementById('hamburger');
+  const nav=document.getElementById('nav').querySelector('ul');
+
+  hamburger.addEventListener('click', ()=>{
+    nav.classList.toggle('show');
+  });
+</script>
+
+</body>
+</html>

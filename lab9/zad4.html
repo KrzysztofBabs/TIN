@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .gallery img {
+    width: 200px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .lightbox-img {
+    max-width: 90%;
+    max-height: 80%;
+    border: 5px solid white;
+    box-shadow: 0 0 20px black;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 60px;
+      color: white;
+      cursor: pointer;
+      padding: 20px;
+      user-select: none;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      transition: background 0.2s;
+  }
+
+  .nav:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .left {
+      left: 30px;
+  }
+
+  .right {
+      right: 30px;
+  }
+
+</style>
+<body>
+
+<div class="gallery">
+  <img src="Barcelona.jpg" alt="Obraz 1">
+  <img src="Barcelona2.jpg" alt="Obraz 2">
+  <img src="Barcelona.jpg" alt="Obraz 3">
+  <img src="Barcelona2.jpg" alt="Obraz 4">
+</div>
+
+
+<div class="lightbox" id="lightbox">
+    <span class="close" id="closeBtn">&times;</span>
+    <span class="nav left" id="prevBtn">&#10094;</span>
+    <img class="lightbox-img" id="lightboxImg" src="">
+    <span class="nav right" id="nextBtn">&#10095;</span>
+</div>
+
+<script>
+    const images = document.querySelectorAll('.gallery img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('closeBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+        if (index < 0) index = images.length - 1;
+        if (index >= images.length) index = 0;
+        lightboxImg.src = images[index].src;
+        currentIndex = index;
+        lightbox.style.display = 'flex';
+    }
+
+    images.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            showImage(index);
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+    });
+
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showImage(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        showImage(currentIndex + 1);
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+            if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+            if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+            if (e.key === 'Escape') lightbox.style.display = 'none';
+        }
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giełdowy Ticker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+    table {
+      border-collapse: collapse;
+      margin-top: 1rem;
+      width: 90%;
+      max-width: 800px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    .up { color: green; }
+    .down { color: red; }
+    .same { color: gray; }
+    #news {
+      margin-top: 2rem;
+      width: 90%;
+      max-width: 800px;
+      padding: 1rem;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #news ul {
+      list-style: none;
+      padding: 0;
+    }
+    #news li {
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      background-color: #f9f9f9;
+      border-left: 4px solid #333;
+    }
+    @media (max-width: 600px) {
+      table, th, td {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Giełdowy Ticker</h1>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Firma</th>
+        <th>Cena</th>
+        <th>Zmiana</th>
+      </tr>
+    </thead>
+    <tbody id="stocks"></tbody>
+  </table>
+
+  <div id="news">
+    <h2>Ostatnie wiadomości</h2>
+    <ul id="news-list"></ul>
+  </div>
+
+  <script>
+    const stockContainer = document.getElementById('stocks');
+    const newsList = document.getElementById('news-list');
+    let previousPrices = {};
+    let recentNews = [];
+
+    async function fetchData(){
+      try{
+        const response=await fetch('http://szuflandia.pjwstk.edu.pl/~ppisarski/zad8/dane.php');
+        const data = await response.json();
+        updateStocks(data.stock);
+        updateNews(data.news);
+      } 
+      catch(error){
+        console.error('Blad:', error);
+      }
+    }
+
+    function updateStocks(stocks){
+      stockContainer.innerHTML = '';
+      for(const [firma, cena] of Object.entries(stocks)){
+        const prev = previousPrices[firma];
+        let changeClass = 'same';
+
+        if(prev !== undefined){
+          if(cena>prev) changeClass = 'up';
+          
+          else if (cena<prev) changeClass = 'down';
+        }
+
+        previousPrices[firma] = cena;
+
+        const row = `<tr>
+          <td>${firma}</td>
+          <td>${cena.toFixed(2)}</td>
+          <td class="${changeClass}">
+            ${changeClass === 'up' ? '↑' : changeClass === 'down' ? '↓' : '→'}
+          </td>
+        </tr>`;
+        stockContainer.innerHTML += row;
+      }
+    }
+
+    function updateNews(news){
+  if(recentNews[0] !== news){
+    recentNews.unshift(news);
+    if(recentNews.length > 3) recentNews.pop();
+    renderNews();
+  }
+}
+
+    function renderNews(){
+      newsList.innerHTML = '';
+      recentNews.forEach(newsItem=>{
+        const li = document.createElement('li');
+        li.textContent = newsItem;
+        newsList.appendChild(li);
+      });
+    }
+
+    setInterval(fetchData, 5000);
+    fetchData();
+  </script>
+</body>
+</html>

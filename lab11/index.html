@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeria Albumów</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 1rem;
+          background: #f9f9f9;
+      }
+
+      h1 {
+          text-align: center;
+      }
+
+      #albums, #photos {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1rem;
+          justify-content: center;
+          margin-bottom: 2rem;
+      }
+
+      .album {
+          background: white;
+          padding: 1rem;
+          border-radius: 8px;
+          cursor: pointer;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+          width: 200px;
+          text-align: center;
+          transition: transform 0.2s;
+      }
+
+      .album:hover {
+          transform: scale(1.05);
+      }
+
+      .photo {
+          width: 150px;
+          height: auto;
+          margin: 5px;
+          border-radius: 4px;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      }
+
+      #form-container {
+          max-width: 500px;
+          margin: 0 auto;
+          background: white;
+          padding: 1rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      label {
+          display: block;
+          margin: 0.5rem 0 0.2rem;
+      }
+
+      input {
+          width: 100%;
+          padding: 0.5rem;
+          margin-bottom: 1rem;
+      }
+
+      button {
+          padding: 0.5rem 1rem;
+          background: #007BFF;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+
+      @media (max-width: 600px) {
+          .album, .photo {
+              width: 100%;
+              max-width: 300px;
+          }
+
+          #albums, #photos {
+              flex-direction: column;
+              align-items: center;
+          }
+      }
+  </style>
+</head>
+<body>
+
+<h1>Galeria Albumow</h1>
+<div id="albums"></div>
+
+<div id="album-title" style="text-align: center; font-weight: bold; margin-bottom: 1rem;"></div>
+<div id="photos"></div>
+
+<div id="form-container">
+  <h2>Dodaj nowe zdjęcie</h2>
+  <form id="photo-form">
+    <label for="albumId">ID albumu</label>
+    <input type="number" id="albumId" name="albumId" required />
+    <label for="title">Tytuł zdjęcia</label>
+    <input type="text" id="title" name="title" required />
+    <label for="url">URL zdjęcia</label>
+    <input type="url" id="url" name="url" required />
+    <label for="thumbnailUrl">URL miniatury</label>
+    <input type="url" id="thumbnailUrl" name="thumbnailUrl" required />
+    <button type="submit">Wyslij</button>
+  </form>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $.get("https://jsonplaceholder.typicode.com/albums",function(albums){
+      albums.forEach(album =>{
+        $("#albums").append(`
+          <div class="album" data-id="${album.id}" data-title="${album.title}">
+            ${album.title}
+          </div>`);
+      });
+    });
+
+
+    $("#albums").on("click", ".album",function(){
+      const albumId =$(this).data("id");
+      const title =$(this).data("title");
+      $("#album-title").text("Album: " + title);
+      $("#photos").empty();
+
+      $.get(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`,function(photos){
+        photos.forEach(photo =>{
+
+          if(photo.thumbnailUrl && photo.url){
+            $("#photos").append(`
+              <a href="${photo.url}" data-lightbox="album-${albumId}" data-title="${photo.title}">
+                <img class="photo" src="${photo.thumbnailUrl}" alt="${photo.title}" />
+              </a>
+            `);
+          }
+        });
+      });
+    });
+
+
+    $("#photo-form").submit(function(e){
+      e.preventDefault();
+
+      const data ={
+        albumId: $("#albumId").val(),
+        title: $("#title").val(),
+        url: $("#url").val(),
+        thumbnailUrl: $("#thumbnailUrl").val()
+      };
+
+      $.post("https://jsonplaceholder.typicode.com/photos",data, function (response){
+        alert("Zdjęcie dodane (mock): ID " + response.id);
+        $("#photo-form")[0].reset();
+      });
+    });
+  });
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

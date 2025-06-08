@@ -6,6 +6,7 @@ class TaskCalendar{
         this.attachEventListeners();
         this.renderCalendar();
         this.renderTasks();
+        this.setupSync();
     }
 
     initializeElements(){
@@ -203,8 +204,34 @@ class TaskCalendar{
         });
     }
 
+    setupSync() {
+        // Synchronizacja przy załadowaniu strony
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'tasks') {
+                this.tasks = JSON.parse(e.newValue) || [];
+                this.renderCalendar();
+                this.renderTasks();
+            }
+        });
+
+        // Synchronizacja co 30 sekund
+        setInterval(() => {
+            const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            if (JSON.stringify(storedTasks) !== JSON.stringify(this.tasks)) {
+                this.tasks = storedTasks;
+                this.renderCalendar();
+                this.renderTasks();
+            }
+        }, 30000);
+    }
+
     saveTasks() {
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
+        // Wywołanie zdarzenia storage dla synchronizacji
+        window.dispatchEvent(new StorageEvent('storage', {
+            key: 'tasks',
+            newValue: JSON.stringify(this.tasks)
+        }));
     }
 }
 

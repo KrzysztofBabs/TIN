@@ -80,14 +80,9 @@ h1 {
     width: 100%;
 }
 
-.day:hover {
-    background-color: #f0f0f0;
-}
-
 .day-number {
     font-weight: bold;
-    margin-bottom: 5px;
-    font-size: 1.1em;
+    margin-bottom: 2px;
 }
 
 .day-tasks {
@@ -221,28 +216,10 @@ h1 {
 
 /* Responsywne style */
 @media screen and (max-width: 768px) {
-    body {
-        padding: 5px;
-    }
-
     .container {
         padding: 5px;
         width: 100%;
         max-width: 100%;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-
-    .calendar-header {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .calendar-header h2 {
-        text-align: center;
-        font-size: 1.2em;
     }
 
     .weekdays, .days {
@@ -261,7 +238,7 @@ h1 {
 
     .day-number {
         font-size: 0.9em;
-        margin-bottom: 2px;
+        margin-bottom: 1px;
     }
 
     .day-task {
@@ -277,23 +254,6 @@ h1 {
     .task-description {
         font-size: 0.7em;
         padding: 1px;
-    }
-
-    .task-form {
-        padding: 15px;
-    }
-
-    .task-item {
-        padding: 10px;
-    }
-
-    .task-item .task-actions {
-        flex-direction: column;
-    }
-
-    .task-item button {
-        width: 100%;
-        margin: 2px 0;
     }
 }
 
@@ -322,5 +282,30 @@ h1 {
 
     .task-description {
         display: none;
+    }
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .day {
+        /* Safari-specific aspect ratio fix */
+        height: 0;
+        padding-bottom: 100%;
+        position: relative;
+    }
+
+    .day > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 2px;
+    }
+
+    @media screen and (max-width: 480px) {
+        .day > * {
+            padding: 1px;
+        }
     }
 } 

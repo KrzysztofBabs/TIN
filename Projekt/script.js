@@ -49,6 +49,9 @@ class TaskCalendar{
         for (let i = 0; i < firstDay.getDay(); i++) {
             const emptyDay = document.createElement('div');
             emptyDay.className = 'day empty';
+            const emptyContent = document.createElement('div');
+            emptyContent.className = 'day-content';
+            emptyDay.appendChild(emptyContent);
             this.calendarDays.appendChild(emptyDay);
         }
         
@@ -57,6 +60,9 @@ class TaskCalendar{
             const dayElement = document.createElement('div');
             dayElement.className = 'day';
             
+            const dayContent = document.createElement('div');
+            dayContent.className = 'day-content';
+            
             const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const tasksForDay = this.tasks.filter(task => task.date === dateString);
             
@@ -64,7 +70,7 @@ class TaskCalendar{
             const dayNumber = document.createElement('div');
             dayNumber.className = 'day-number';
             dayNumber.textContent = day;
-            dayElement.appendChild(dayNumber);
+            dayContent.appendChild(dayNumber);
             
             // Dodajemy zadania do dnia
             if (tasksForDay.length > 0) {
@@ -75,7 +81,6 @@ class TaskCalendar{
                     const taskElement = document.createElement('div');
                     taskElement.className = `day-task ${task.completed ? 'completed' : ''}`;
                     
-                    // Dodajemy tytuł i opis
                     const taskTitle = document.createElement('div');
                     taskTitle.className = 'task-title';
                     taskTitle.textContent = task.title;
@@ -89,10 +94,11 @@ class TaskCalendar{
                     tasksContainer.appendChild(taskElement);
                 });
                 
-                dayElement.appendChild(tasksContainer);
+                dayContent.appendChild(tasksContainer);
                 dayElement.classList.add('has-tasks');
             }
             
+            dayElement.appendChild(dayContent);
             dayElement.addEventListener('click', () => this.showTasksForDate(dateString));
             this.calendarDays.appendChild(dayElement);
         }

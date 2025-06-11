@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalendarz Zadań</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="kontener">
+        <h1>Kalendarz Zadań</h1>
+        
+        <div class="naglowek-kalendarza">
+            <button id="poprzedniMiesiac">&lt;</button>
+            <h2 id="aktualnyMiesiac">Styczeń 2024</h2>
+            <button id="nastepnyMiesiac">&gt;</button>
+        </div>
+
+        <div class="siatka-kalendarza">
+            <div class="dni-tygodnia">
+                <div>Pon</div>
+                <div>Wt</div>
+                <div>Śr</div>
+                <div>Czw</div>
+                <div>Pt</div>
+                <div>Sob</div>
+                <div>Nd</div>
+            </div>
+            <div id="dniKalendarza" class="dni"></div>
+        </div>
+
+        <div class="formularz-zadania">
+            <h3>Dodaj Zadanie</h3>
+            <input type="text" id="tytulZadania" placeholder="Tytuł zadania">
+            <textarea id="opisZadania" placeholder="Opis zadania"></textarea>
+            <input type="date" id="dataZadania">
+            <button id="dodajZadanie">Dodaj Zadanie</button>
+        </div>
+
+        <div class="kontener-zadan">
+            <h3>Lista Zadań</h3>
+            <div id="listaZadan"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
